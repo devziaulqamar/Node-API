@@ -46,25 +46,7 @@ const jsonResponse = [
 
 // Express route
 app.get("/api/html", (req, res) => {
-  const renderedHtml = `
-    <ul>
-      ${jsonResponse
-        .map(
-          (item, index) => `
-        <li>
-          <div class="rounded border border-blue-500 p-2 my-2">
-            <div class="flex w-full justify-between">
-              <p>${item.id}</p>
-              <span class="text-lg cursor-pointer">⯅</span>
-            </div>
-            <p>${item.content}</p>
-          </div>
-        </li>
-      `
-        )
-        .join("")}
-    </ul>
-  `;
+  const renderedHtml = `<button onClick={console.log("Test from server)}>Hello Test</button>`;
   res.send(renderedHtml);
 });
 
