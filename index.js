@@ -56,13 +56,10 @@ app.get("/api/html", (req, res) => {
           <div className="rounded border border-blue-500 p-2 my-2" key="${index}">
           <div className="flex w-full justify-between" onClick={() => toggleDetails(${index}, ${shipment.id})}>
             <p>${shipment.id}</p>
-            <span className="text-lg cursor-pointer">{${openIndex} === ${index} ? "⯆" : "⯅"}</span>
+            <span className="text-lg cursor-pointer">{openIndex === ${index} ? "⯆" : "⯅"}</span>
           </div>
-          {${openIndex} === ${index} && <p>Rest of the details...</p>}
+          {openIndex === ${index} && <p>${shipment.content}</p>}
         </div>
-
-
-
           </li>
           `
       )
