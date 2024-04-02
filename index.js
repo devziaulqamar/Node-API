@@ -35,6 +35,37 @@ app.post("/api/createProduct", async (req, res) => {
   }
 });
 
+
+// Static JSON response
+const jsonResponse = [
+  { id: "S00001099", content: "Here is the content for shipment S00001099" },
+  { id: "S00001100", content: "Here is the content for shipment S00001100" },
+  { id: "S00001101", content: "Here is the content for shipment S00001101" }
+];
+
+// Express route
+app.get('/api/html', (req, res) => {
+  const htmlResponse = `
+    <ul>
+      <li>
+        ${jsonResponse.map((shipment, index) => (
+          `<div class="rounded border border-blue-500 p-2 my-2" key=${index}>
+            <div class="flex w-full justify-between" onClick="toggleDetails(${index}, '${shipment.id}')">
+              <p>SHIPMENT ID: ${shipment.id}</p>
+              <span class="text-lg cursor-pointer" id="toggleIcon${index}">⯅</span>
+            </div>
+            <p id="details${index}" style="display:none;">${shipment.content}</p>
+          </div>`
+        )).join('')}
+      </li>
+    </ul>
+  `;
+
+  res.send(htmlResponse);
+});
+
+
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
