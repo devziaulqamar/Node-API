@@ -46,16 +46,25 @@ const jsonResponse = [
 
 // Express route
 app.get("/api/html", (req, res) => {
-  const renderedHtml = jsonResponse.map((item, index) => (
-    <div className="rounded border border-blue-500 p-2 my-2" key={index}>
-      <div className="flex w-full justify-between" onClick={() => toggleDetails(index)}>
-        <p>{item.id}</p>
-        <span className="text-lg cursor-pointer">{openIndex === index ? '⯆' : '⯅'}</span>
-      </div>
-      {openIndex === index && <p>{item.content}</p>}
-    </div>
-  ));
-
+  const renderedHtml = `
+    <ul>
+      ${jsonResponse
+        .map(
+          (item, index) => `
+        <li>
+          <div class="rounded border border-blue-500 p-2 my-2">
+            <div class="flex w-full justify-between">
+              <p>${item.id}</p>
+              <span class="text-lg cursor-pointer">⯅</span>
+            </div>
+            <p>${item.content}</p>
+          </div>
+        </li>
+      `
+        )
+        .join("")}
+    </ul>
+  `;
   res.send(renderedHtml);
 });
 
