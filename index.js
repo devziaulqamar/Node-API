@@ -46,7 +46,7 @@ const jsonResponse = [
 
 // Express route
 app.get("/api/html", (req, res) => {
-  const renderedHtml = `<button onClick={console.log("Test from server)}>Hello Test</button>`;
+  const renderedHtml = `<button onClick={handleButtonClick}>Hello Test</button>`;
   res.send(renderedHtml);
 });
 
