@@ -3,8 +3,10 @@
 // Import required modules
 const express = require("express");
 const axios = require("axios");
+const cors = require("cors");
 
 const app = express();
+app.use(cors());
 const port = process.env.PORT;
 
 app.get("/api/prodcut", async (req, res) => {
@@ -35,7 +37,6 @@ app.post("/api/createProduct", async (req, res) => {
   }
 });
 
-
 // Static JSON response
 const jsonResponse = [
   { id: "S00001099", content: "Here is the content for shipment S00001099" },
@@ -63,8 +64,6 @@ app.get('/api/html', (req, res) => {
 
   res.send(htmlResponse);
 });
-
-
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
