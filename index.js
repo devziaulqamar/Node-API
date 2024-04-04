@@ -46,7 +46,28 @@ const jsonResponse = [
 
 // Express route
 app.get("/api/html", (req, res) => {
-  const renderedHtml = `<button id="abc" class="bg-red-500 text-white border rounded">Hello Test</button>`;
+  const renderedHtml = `
+    <ul id="shipments">
+      <li class="shipment-item">
+        <div class="rounded border border-blue-500 p-2 my-2">
+          <div class="flex w-full justify-between" data-shipment-id="S00001099">
+            <p>SHIPMENT ID</p>
+            <span class="text-lg cursor-pointer toggle-button"> ⯆⯅</span>
+          </div>
+          <p class="details">Rest of the details...</p>
+        </div>
+      </li>
+      <li class="shipment-item">
+        <div class="rounded border border-blue-500 p-2 my-2">
+          <div class="flex w-full justify-between" data-shipment-id="S00001099">
+            <p>SHIPMENT ID</p>
+            <span class="text-lg cursor-pointer toggle-button"> ⯆⯅</span>
+          </div>
+          <p class="details">Rest of the details...</p>
+        </div>
+      </li>
+    </ul>
+  `;
   res.send(renderedHtml);
 });
 
