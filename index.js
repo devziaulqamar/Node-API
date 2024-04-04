@@ -44,30 +44,24 @@ const jsonResponse = [
   { id: "S00001101", content: "Here is the content for shipment S00001101" },
 ];
 
-// Express route
 app.get("/api/html", (req, res) => {
-  const renderedHtml = `
-    <ul id="shipments">
+  let renderedHtml = `<ul id="shipments">`;
+
+  jsonResponse.forEach((shipment) => {
+    renderedHtml += `
       <li class="shipment-item">
         <div class="rounded border border-blue-500 p-2 my-2">
-          <div class="flex w-full justify-between" data-shipment-id="S00001099">
-            <p>SHIPMENT ID</p>
+          <div class="flex w-full justify-between" data-shipment-id="${shipment.id}">
+            <p>${shipment.id}</p>
             <span class="text-lg cursor-pointer toggle-button"> ⯆⯅</span>
           </div>
-          <p class="details">Rest of the details...</p>
+          <p class="details hidden">${shipment.content}</p>
         </div>
-      </li>
-      <li class="shipment-item">
-        <div class="rounded border border-blue-500 p-2 my-2">
-          <div class="flex w-full justify-between" data-shipment-id="S00001099">
-            <p>SHIPMENT ID</p>
-            <span class="text-lg cursor-pointer toggle-button"> ⯆⯅</span>
-          </div>
-          <p class="details">Rest of the details...</p>
-        </div>
-      </li>
-    </ul>
-  `;
+      </li>`;
+  });
+
+  renderedHtml += `</ul>`;
+  
   res.send(renderedHtml);
 });
 
