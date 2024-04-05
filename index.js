@@ -4,10 +4,72 @@
 const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 
 const app = express();
 app.use(cors());
-const port = process.env.PORT;
+app.use(bodyParser.urlencoded({ extended: true }));
+
+const port = process.env.PORT || 3001;
+
+app.post("/api/keycloak-token", async (req, res) => {
+  try {
+    const { code } = req.body;
+
+    // Make the request to Keycloak
+    const keycloakUrl =
+      "https://ssodev.dragonteam.dev/auth/realms/Variiance/protocol/openid-connect/token";
+    const response = await axios.post(
+      keycloakUrl,
+      {
+        client_id: "VLC",
+        redirect_uri: "https://localhost:3000/assets/redirectPage.html",
+        code: code,
+        grant_type: "authorization_code",
+      },
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    );
+
+    // Respond with the token data
+    res.json(response.data);
+  } catch (error) {
+    console.error("Error:", error.response.data);
+    res.status(500).json({ error: "Failed to get token" });
+  }
+});
+
+app.post("/api/refresh-token", async (req, res) => {
+  try {
+    const { refresh_token } = req.body;
+
+    // Make the request to refresh the token
+    const keycloakUrl =
+      "https://ssodev.dragonteam.dev/auth/realms/Variiance/protocol/openid-connect/token";
+    const response = await axios.post(
+      keycloakUrl,
+      {
+        client_id: "VLC",
+        grant_type: "refresh_token",
+        refresh_token: refresh_token,
+      },
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    );
+
+    // Respond with the refreshed token data
+    res.json(response.data);
+  } catch (error) {
+    console.error("Error:", error.response.data);
+    res.status(500).json({ error: "Failed to refresh token" });
+  }
+});
 
 app.get("/api/prodcut", async (req, res) => {
   try {
@@ -61,7 +123,7 @@ app.get("/api/html", (req, res) => {
   });
 
   renderedHtml += `</ul>`;
-  
+
   res.send(renderedHtml);
 });
 
