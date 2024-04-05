@@ -37,8 +37,14 @@ app.post("/api/keycloak-token", async (req, res) => {
     // Respond with the token data
     res.json(response.data);
   } catch (error) {
-    console.error("Error:", error.response.data);
-    res.status(500).json({ error: "Failed to get token" });
+    if (error.response && error.response.data) {
+      // If the error response contains data, return it
+      return res.status(error.response.status).json(error.response.data);
+    } else {
+      // Otherwise, return a generic error message
+      console.error("Error:", error.message);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
   }
 });
 
