@@ -121,7 +121,7 @@ app.get("/api/html", (req, res) => {
         <div class="rounded border border-blue-500 p-2 my-2">
           <div class="flex w-full justify-between" data-shipment-id="${shipment.id}">
             <p id="shipment-id">${shipment.id}</p>
-            <span class="text-lg cursor-pointer toggle-button" onclick="toggleFunc(${shipment.id})">+</span>
+            <span class="text-lg cursor-pointer toggle-button" onclick="toggleFunc(${JSON.stringify(shipment)})">+</span>
           </div>
           <p class="details hidden">${shipment.content}</p>
         </div>
