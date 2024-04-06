@@ -23,8 +23,8 @@ app.post("/api/keycloak-token", async (req, res) => {
       keycloakUrl,
       {
         client_id: "VLC",
-        redirect_uri: "https://localhost:3000/assets/redirectPage.html",
-        // redirect_uri: "https://projects.ziaulqamar.com/v-connect/assets/redirectPage.html",
+        // redirect_uri: "https://localhost:3000/assets/redirectPage.html",
+        redirect_uri: "https://projects.ziaulqamar.com/v-connect/assets/redirectPage.html",
         code: code,
         grant_type: "authorization_code",
       },
