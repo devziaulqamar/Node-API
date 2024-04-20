@@ -18,13 +18,13 @@ app.post("/api/keycloak-token", async (req, res) => {
 
     // Make the request to Keycloak
     const keycloakUrl =
-      "https://ssodev.dragonteam.dev/auth/realms/Variiance/protocol/openid-connect/token";
+      https://sso.vconnct.me/auth/realms/Variiance/protocol/openid-connect/token";
     const response = await axios.post(
       keycloakUrl,
       {
         client_id: "VLC",
-        // redirect_uri: "https://localhost:3000/assets/redirectPage.html",
-        redirect_uri: "https://projects.ziaulqamar.com/v-connect/assets/redirectPage.html",
+         redirect_uri: "https://localhost:3000/assets/redirectPage.html",
+        //redirect_uri: "https://projects.ziaulqamar.com/v-connect/assets/redirectPage.html",
         code: code,
         grant_type: "authorization_code",
       },
@@ -55,7 +55,7 @@ app.post("/api/refresh-token", async (req, res) => {
 
     // Make the request to refresh the token
     const keycloakUrl =
-      "https://ssodev.dragonteam.dev/auth/realms/Variiance/protocol/openid-connect/token";
+      "https://sso.vconnct.me/auth/realms/Variiance/protocol/openid-connect/token";
     const response = await axios.post(
       keycloakUrl,
       {
