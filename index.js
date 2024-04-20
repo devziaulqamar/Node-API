@@ -18,7 +18,7 @@ app.post("/api/keycloak-token", async (req, res) => {
 
     // Make the request to Keycloak
     const keycloakUrl =
-      https://sso.vconnct.me/auth/realms/Variiance/protocol/openid-connect/token";
+      "https://sso.vconnct.me/auth/realms/Variiance/protocol/openid-connect/token";
     const response = await axios.post(
       keycloakUrl,
       {
