@@ -18,7 +18,7 @@ app.post("/api/keycloak-token", async (req, res) => {
 
     // Make the request to Keycloak
     const keycloakUrl =
-      "https://sso.vconnct.me/auth/realms/Variiance/protocol/openid-connect/token";
+      "https://api.dragonteam.dev/auth/realms/Variiance/protocol/openid-connect/token";
     const response = await axios.post(
       keycloakUrl,
       {
@@ -55,7 +55,7 @@ app.post("/api/refresh-token", async (req, res) => {
 
     // Make the request to refresh the token
     const keycloakUrl =
-      "https://sso.vconnct.me/auth/realms/Variiance/protocol/openid-connect/token";
+      "https://api.dragonteam.dev/auth/realms/Variiance/protocol/openid-connect/token";
     const response = await axios.post(
       keycloakUrl,
       {
